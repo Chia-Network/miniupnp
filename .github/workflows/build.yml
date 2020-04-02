@@ -56,6 +56,7 @@ jobs:
     - name: Install twine
       run: pip install twine
     - name: Publish distribution to Test PyPI
+      if: 0
       env:
         TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
         TWINE_USERNAME: __token__
