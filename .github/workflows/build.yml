@@ -18,7 +18,7 @@ jobs:
 
     - name: Unpack zip file
       run: |
-        tar xfz miniupnpc-2.0.2.tar.gz
+        tar vxfz miniupnpc-2.0.2.tar.gz --strip-components 1
 
     - uses: actions/setup-python@v1
       name: Install Python
