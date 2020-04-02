@@ -7,8 +7,9 @@ jobs:
     name: Build wheel on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: False
       matrix:
-        os: [macos-latest, ubuntu-18.04, windows-latest]
+        os: [macos-latest, ubuntu-18.04] #, windows-latest]
 
     steps:
     - uses: actions/checkout@v1
