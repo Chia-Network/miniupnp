@@ -38,10 +38,10 @@ jobs:
       with:
         update: true
 
-    - name: Windows install dependencies and build
+    - name: Windows install dependencies
       if: startsWith(matrix.os, 'windows')
       run: |
-        msys2do pacman -S --noconfirm mingw-w64-x86_64-toolchain make
+        msys2do pacman -S --noconfirm mingw-w64-i686-toolchain
       #msys2do ./windows-build.sh
 
     - name: Build wheel
@@ -52,7 +52,7 @@ jobs:
         # build python 3.7 and 3.8
         CIBW_BUILD: cp37-* cp38-*
         CIBW_BEFORE_BUILD: python -m pip install --upgrade pip
-        CIBW_BEFORE_BUILD_WINDOWS: python -m pip install --upgrade pip && set PATH=%PATH%;C:\msys64\mingw32\bin && mingw32-make -f Makefile.mingw pythonmodule
+        CIBW_BEFORE_BUILD_WINDOWS: python -m pip install --upgrade pip && set PATH=%PATH%;C:\msys64\mingw32\bin && mingw32-make -f Makefile.mingw pythonmodule PYTHON=C:\Python37\python
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
