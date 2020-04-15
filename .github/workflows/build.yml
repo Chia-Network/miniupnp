@@ -9,7 +9,8 @@ jobs:
     strategy:
       fail-fast: False
       matrix:
-        os: [macos-latest, ubuntu-18.04, windows-latest] #, windows-latest]
+        os: [windows-latest]
+        #os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
     - uses: actions/checkout@v1
@@ -31,6 +32,18 @@ jobs:
       run: |
         choco install vcpython27 -f -y
 
+    - name: Prepare Windows Build environment - add MSYS2
+      if: startsWith(matrix.os, 'windows')
+      uses: numworks/setup-msys2@v1
+      with:
+        update: true
+
+    - name: Windows install dependencies and build
+      if: startsWith(matrix.os, 'windows')
+      run: |
+        msys2do pacman -S --noconfirm mingw-w64-x86_64-toolchain make
+      #msys2do ./windows-build.sh
+
     - name: Build wheel
       run: |
         cd miniupnpc
@@ -39,6 +52,7 @@ jobs:
         # build python 3.7 and 3.8
         CIBW_BUILD: cp37-* cp38-*
         CIBW_BEFORE_BUILD: python -m pip install --upgrade pip
+        CIBW_BEFORE_BUILD_WINDOWS: python -m pip install --upgrade pip && mingw32-make -f Makefile.mingw pythonmodule
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
