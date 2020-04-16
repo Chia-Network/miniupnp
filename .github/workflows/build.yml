@@ -32,16 +32,16 @@ jobs:
       run: |
         choco install vcpython27 -f -y
 
-    - name: Prepare Windows Build environment - add MSYS2
-      if: startsWith(matrix.os, 'windows')
-      uses: numworks/setup-msys2@v1
-      with:
-        update: true
+    #- name: Prepare Windows Build environment - add MSYS2
+      #if: startsWith(matrix.os, 'windows')
+      #uses: numworks/setup-msys2@v1
+      #with:
+        #update: true
 
-    - name: Windows install dependencies
-      if: startsWith(matrix.os, 'windows')
-      run: |
-        msys2do pacman -S --noconfirm mingw-w64-i686-toolchain
+    #- name: Windows install dependencies
+      #if: startsWith(matrix.os, 'windows')
+      #run: |
+        #msys2do pacman -S --noconfirm mingw-w64-i686-toolchain
       #msys2do ./windows-build.sh
 
     - name: Build wheel
@@ -52,7 +52,8 @@ jobs:
         # build python 3.7 and 3.8
         CIBW_BUILD: cp37-* cp38-*
         CIBW_BEFORE_BUILD: python -m pip install --upgrade pip
-        CIBW_BEFORE_BUILD_WINDOWS: python -m pip install --upgrade pip && set PATH=%PATH%;C:\msys64\mingw32\bin && mingw32-make -f Makefile.mingw pythonmodule PYTHON=C:\Python37\python
+        #CIBW_BEFORE_BUILD_WINDOWS: python -m pip install --upgrade pip && set PATH=%PATH%;C:\msys64\mingw32\bin && mingw32-make -f Makefile.mingw pythonmodule PYTHON=C:\Python37\python
+        CIBW_BEFORE_BUILD_WINDOWS: cp setupmingw32.py setup.py
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
       with:
