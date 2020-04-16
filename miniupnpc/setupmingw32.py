@@ -18,7 +18,7 @@ try:
 except ImportError:
         from distutils.core import setup, Extension
 from distutils import sysconfig
-sysconfig.get_config_vars()["OPT"] = ''
+sysconfig.get_config_vars()["OPT"] = 'MINIUPNP_STATICLIB'
 sysconfig.get_config_vars()["CFLAGS"] = ''
 setup(name="miniupnpc",
       version=open('VERSION').read().strip(),
@@ -32,4 +32,3 @@ setup(name="miniupnpc",
                    libraries=["ws2_32", "iphlpapi"] + compat_lib,
                    extra_objects=["libminiupnpc.a"])
       ])
-
