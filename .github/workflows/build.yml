@@ -26,6 +26,7 @@ jobs:
     - name: Build source distribution
       run: |
         pip install pep517
+        cd miniupnpc
         python -m pep517.build --source --out-dir dist .
         
     - name: Install cibuildwheel
