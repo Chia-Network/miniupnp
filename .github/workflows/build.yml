@@ -9,8 +9,7 @@ jobs:
     strategy:
       fail-fast: False
       matrix:
-        os: [windows-latest]
-        #os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
     - uses: actions/checkout@v1
@@ -24,6 +23,7 @@ jobs:
         python-version: '3.7'
 
     - name: Build source distribution
+      if: startsWith(matrix.os, 'mac')
       run: |
         pip install pep517
         cd miniupnpc
