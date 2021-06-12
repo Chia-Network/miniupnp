@@ -1,4 +1,70 @@
-$Id: Changelog.txt,v 1.460 2020/04/12 17:27:31 nanard Exp $
+$Id: Changelog.txt,v 1.478 2021/05/21 22:03:13 nanard Exp $
+
+2021/05/22:
+  dynamically retrieve `uname -r`
+
+VERSION 2.2.2 : released on 2021/05/13
+
+2021/04/22:
+  Add SO_REUSEPORT option for SSDP receive sockets
+
+2021/03/31:
+  GetExternalIPAddress returns empty string when the External IP address can
+    not be retrieved.
+
+2021/02/26:
+  iptables_removeall.sh: fix the cleanup of PREROUTING mangle chain
+
+VERSION 2.2.1 : released on 2020/12/20
+ (only minor build corrections)
+
+VERSION 2.2.0 : released on 2020/10/31
+
+2020/10/30:
+  OpenBSD: portinuse.c compatible with OpenBSD 5.5+
+
+2020/10/26:
+  Improve AddAnyPortMapping port selection
+
+2020/10/22:
+  netfilter_nft: fix rule-cache update when using the same chain name in
+    both tables.
+
+2020/06/20:
+  -v/-vv to output more log (LOG_INFO / LOG_DEBUG)
+  AddAnyPortMapping() tries all possible ports
+
+2020/06/10:
+  improvements and bug fixes in netfilter_nft/nftnlrdr_misc.c
+
+2020/06/05:
+  fix handling of ipv4 M-SEARCH received on ipv6 sockets
+  numerous fixes in linux/nftables implementation
+
+2020/06/03:
+  configure --disable-fork to disable going to background
+  improve upnp_get_portmapping_number_of_entries()
+
+2020/05/30:
+  "IGD2 Port Triggering" pf implementation (adding a nat rule)
+
+2020/05/07:
+  Linux: use libcap or libcap-ng to drop unnecessary capabilities
+
+2020/05/04:
+  Move configuration detection from Makefiles to configure (was genconfig.sh)
+  update linux Makefiles
+
+2020/04/29:
+  fix for bridges
+
+2020/04/21:
+  Remove FW API detecting code from Makefile (BSD). generate bsdmake.inc
+  netfilter: addmasqueraderule() even if internal/external ports are the same
+  improve error and debug log in upnpstun.c
+
+2020/04/20:
+  Fix "IGD2 Port Triggering" in update_portmapping()
 
 2020/04/12:
   pf: disabled setting dst address in rule by default

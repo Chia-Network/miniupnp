@@ -88,6 +88,9 @@
     <PreBuildEvent>
       <Command>genminiupnpcstrings.vbs</Command>
     </PreBuildEvent>
+    <ResourceCompile>
+      <PreprocessorDefinitions>INTERNAL_NAME="\"miniupnpc.dll\0\"";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Dll|Win32'">
     <ClCompile>
@@ -107,6 +110,9 @@
     <Link>
       <AdditionalDependencies>ws2_32.lib;IPHlpApi.Lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>INTERNAL_NAME="\"miniupnpc.dll\0\"";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -123,6 +129,9 @@
     <PreBuildEvent>
       <Command>genminiupnpcstrings.vbs</Command>
     </PreBuildEvent>
+    <ResourceCompile>
+      <PreprocessorDefinitions>INTERNAL_NAME="\"miniupnpc.dll\0\"";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Dll|Win32'">
     <ClCompile>
@@ -142,8 +151,12 @@
     <Link>
       <AdditionalDependencies>ws2_32.lib;IPHlpApi.Lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>INTERNAL_NAME="\"miniupnpc.dll\0\"";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\addr_is_reserved.c" />
     <ClCompile Include="..\connecthostport.c" />
     <ClCompile Include="..\igd_desc_parse.c" />
     <ClCompile Include="..\minisoap.c" />
@@ -159,6 +172,7 @@
     <ClCompile Include="..\upnpreplyparse.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\addr_is_reserved.h" />
     <ClInclude Include="..\connecthostport.h" />
     <ClInclude Include="..\igd_desc_parse.h" />
     <ClInclude Include="..\minisoap.h" />
@@ -177,9 +191,14 @@
     <ClInclude Include="..\upnpdev.h" />
     <ClInclude Include="..\upnperrors.h" />
     <ClInclude Include="..\upnpreplyparse.h" />
+    <ClInclude Include="..\win32_snprintf.h" />
+	<ClInclude Include="..\rc_version.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="genminiupnpcstrings.vbs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="../miniupnpc.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

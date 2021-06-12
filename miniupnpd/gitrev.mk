@@ -1,9 +1,8 @@
-# (c) 2019 Thomas Bernard
+# (c) 2019-2020 Thomas Bernard
 # For GNU Make
 
 ISGITREPO := $(shell git rev-parse --is-inside-work-tree)
 ifeq ($(ISGITREPO),true)
-GITREF := $(shell git rev-parse --short HEAD)
-GITBRANCH := $(shell git rev-parse --abbrev-ref HEAD)
-CFLAGS += -DMINIUPNPD_GIT_REF=\"$(GITBRANCH)-$(GITREF)\"
+GITREF := $(shell git describe --exact-match --tags 2> /dev/null || echo "`git rev-parse --abbrev-ref HEAD`-`git rev-parse --short HEAD`" )
+CPPFLAGS += -DMINIUPNPD_GIT_REF=\"$(GITREF)\"
 endif
